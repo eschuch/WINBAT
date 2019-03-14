@@ -89,7 +89,7 @@ echo.
 echo.Caso sucesso, retorna o destino da URL passada para STDOUT e
 echo.pode ser capturado com ERRORLEVEL 0.
 echo.
-echo.https://github.com/eschuch/WINBAT
+echo.https://raw.githubusercontent.com/eschuch/WINBAT/master/BAT_HTML_DOWNLOAD.bat
 echo.Baseado em https://stackoverflow.com/questions/43059943/
 echo.
 echo.-------------------------------------------------------------------

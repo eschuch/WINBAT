@@ -24,6 +24,7 @@ if [%ERRORLEVEL%]==[1]  (
 	set "found=false"
 ) else (
 	for /f %%a in ('type "%destination%"') do (
+:::::::::::::::please add more words that can result ping fail, or will not work for your OS ::::::::::::::::::::::::
 		if [%%a]==[A] set "found=false"
 		if [%%a]==[Esgotado] set "found=false"
 		if [%%a]==[PING:] set "found=false"

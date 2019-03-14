@@ -38,7 +38,7 @@ echo 37
         bitsadmin /resume "%taskName%" > nul 2>&1
     )
 
-:: Downloading ::
+:: Downloading :::
     set "exitCode="
     for /l %%a in (1 1 10) do if not defined exitCode for /f "delims=" %%a in ('
         bitsadmin /info "%taskName%"

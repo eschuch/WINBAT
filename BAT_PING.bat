@@ -1,4 +1,4 @@
-::@echo off
+@echo off
 :: bat ping tool
 :: exit 0 = ok
 :: exit 1 = nao existe/nao responde/FAIL

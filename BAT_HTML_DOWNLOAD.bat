@@ -25,14 +25,15 @@ setlocal enableextensions disabledelayedexpansion
 :: Testa task ::
    (
         rem remove task if already present
-        bitsadmin /list | find "%taskName%" && bitsadmin /cancel "%taskName%" > nul 2>&1
+        bitsadmin /list | find "%taskName%" && bitsadmin /cancel "%taskName%"
         rem create the task
-        bitsadmin /create "%taskName%" > nul 2>&1
+        bitsadmin /create "%taskName%"
         rem include our file in the task
-        bitsadmin /ADDFILEWITHRANGES "%taskName%" "%source%" "%destination%" 0:eof > nul 2>&1
+        bitsadmin /ADDFILEWITHRANGES "%taskName%" "%source%" "%destination%" 0:eof 
         rem start the download
-        bitsadmin /resume "%taskName%" > nul 2>&1
-    ) > nul 2>&1
+        bitsadmin /resume "%taskName%" 
+    ) 
+	::> nul 2>&1
 
 :: Downloading ::
     set "exitCode="
@@ -51,9 +52,10 @@ setlocal enableextensions disabledelayedexpansion
         )
         if not defined exitCode (
             echo(%%b %%c
-            timeout /t 2 >nul 
+            timeout /t 4
         )
-    ) > nul 2>&1
+    ) 
+	::> nul 2>&1
 	
 :: Saida com falhas ::
     if not defined exitCode ( echo FALHA TIMEOUT & exit /b 1 )

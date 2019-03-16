@@ -23,7 +23,7 @@ setlocal enableextensions disabledelayedexpansion
 
 
 :: Testa task ::
->nul (
+   (
         rem remove task if already present
         bitsadmin /list | find "%taskName%" && bitsadmin /cancel "%taskName%" > nul 2>&1
         rem create the task
@@ -32,7 +32,7 @@ setlocal enableextensions disabledelayedexpansion
         bitsadmin /ADDFILEWITHRANGES "%taskName%" "%source%" "%destination%" 0:eof > nul 2>&1
         rem start the download
         bitsadmin /resume "%taskName%" > nul 2>&1
-    )
+    ) > nul 2>&1
 
 :: Downloading ::
     set "exitCode="
@@ -42,12 +42,12 @@ setlocal enableextensions disabledelayedexpansion
     ')  do for /f "tokens=3,*" %%b in ("%%a") do (
         if "%%~b"=="TRANSFERRED" ( 
             set "exitCode=0"
-            >nul bitsadmin /complete "%taskName%" > nul 2>&1
+            bitsadmin /complete "%taskName%"
         )
         if "%%~b"=="ERROR" ( 
             set "exitCode=1"
             bitsadmin /geterror "%taskName%" | findstr /b /c:"ERROR"
-            >nul bitsadmin /cancel "%taskName%"
+            bitsadmin /cancel "%taskName%"
         )
         if not defined exitCode (
             echo(%%b %%c

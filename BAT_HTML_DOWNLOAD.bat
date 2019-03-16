@@ -3,7 +3,7 @@
 :: exit 0 = ok
 :: exit 1 = nao existe/nao responde/FAIL
 :: Por els.net.br (eschuch@gmail.com)
-:: baseado em "https://stackoverflow.com/questions/43059943/how-to-force-exit-command-line-bat-file-when-occur-download-error"
+:: baseado em "https://stackoverflow.com/questions/43059943/"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Verifica se há parametros ::

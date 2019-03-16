@@ -1,4 +1,4 @@
-@echo off
+::@echo off
 :: bat ping tool
 :: exit 0 = ok
 :: exit 1 = nao existe/nao responde/FAIL
@@ -17,31 +17,27 @@ if [%~1]==[?] goto :blank
 setlocal enableextensions disabledelayedexpansion
 SET "destination=%cd%\tmp_%RANDOM%.log"
 set "found=true"
-
+set "words=A Esgotado PING: Falha Fail Exhausted An"
 
 ping %~1 %~2 > "%destination%" 2>&1
 if [%ERRORLEVEL%]==[1]  (
 	set "found=false"
 ) else (
 	for /f %%a in ('type "%destination%"') do (
-:::::::::::::::please add more words that can result ping fail, or will not work for your OS ::::::::::::::::::::::::
-		if [%%a]==[A] set "found=false"
-		if [%%a]==[Esgotado] set "found=false"
-		if [%%a]==[PING:] set "found=false"
-		if [%%a]==[Falha] set "found=false"
-		if [%%a]==[Fail] set "found=false"
-		if [%%a]==[Exhausted] set "found=false"
-		if [%%a]==[An] set "found=false"
+		for /l %%n in (%words%) do (
+			if [%%a]==[%%n] set "found=false"
+			)
+		)
 	)
 )
+
+::. Exits .::
+type "%destination%"
+del "%destination%"
 if %found% == true (
-	type "%destination%"
-	del "%destination%"
 	echo SUCESSO
 	exit /b 0
 ) else (
-	type "%destination%"
-	del "%destination%"
 	echo FALHA
 	exit /b 1
 )
@@ -64,3 +60,5 @@ echo.
 echo.els.net.br https://github.com/eschuch/WINBAT (eschuch@gmail.com) BAT_PING.bat
 echo.
 echo.-------------------------------------------------------------------
+
+goto:eof

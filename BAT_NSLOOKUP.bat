@@ -58,3 +58,5 @@ echo.
 echo.els.net.br https://github.com/eschuch/WINBAT (eschuch@gmail.com) BAT_NSLOOKUP.bat
 echo.
 echo.-------------------------------------------------------------------
+
+goto:eof

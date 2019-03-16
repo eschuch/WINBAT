@@ -3,7 +3,7 @@
 :: exit 0 = ok
 :: exit 1 = nao existe/nao responde/FAIL
 :: Por els.net.br (eschuch@gmail.com)
-:: baseado em "https://stackoverflow.com/questions/43059943/"
+:: baseado em "https://stackoverflow.com/questions/43059943/how-to-force-exit-command-line-bat-file-when-occur-download-error"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Verifica se há parametros ::
@@ -16,7 +16,7 @@ if [%~1]==[?] goto :blank
 
 
 :: Variaveis ::
-SET "destination=%cd%\tmp.log"
+SET "destination=%cd%\tmp_%RANDOM%.log"
 set "taskName=[Bat_Get_HTTP_%RANDOM%]"
 SET "source=%~1"
 setlocal enableextensions disabledelayedexpansion
@@ -38,7 +38,7 @@ echo 37
         bitsadmin /resume "%taskName%" > nul 2>&1
     )
 
-:: Downloading :::
+:: Downloading ::
     set "exitCode="
     for /l %%a in (1 1 10) do if not defined exitCode for /f "delims=" %%a in ('
         bitsadmin /info "%taskName%"
@@ -89,7 +89,9 @@ echo.
 echo.Caso sucesso, retorna o destino da URL passada para STDOUT e
 echo.pode ser capturado com ERRORLEVEL 0.
 echo.
-echo.https://raw.githubusercontent.com/eschuch/WINBAT/master/BAT_HTML_DOWNLOAD.bat
+echo.els.net.br https://github.com/eschuch/WINBAT (eschuch@gmail.com) BAT_HTML_DOWNLOAD.bat
 echo.Baseado em https://stackoverflow.com/questions/43059943/
 echo.
 echo.-------------------------------------------------------------------
+
+goto:eof

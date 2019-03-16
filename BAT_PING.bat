@@ -1,4 +1,4 @@
-::@echo off
+@echo off
 :: bat ping tool
 :: exit 0 = ok
 :: exit 1 = nao existe/nao responde/FAIL
@@ -24,12 +24,7 @@ if [%ERRORLEVEL%]==[1]  (
 	set "found=false"
 ) else (
 	for /f %%a in ('type "%destination%"') do (
-<<<<<<< HEAD
-		for /l %%n in (%words%) do (
-			if [%%a]==[%%n] set "found=false"
-			)
-		)
-=======
+
 		if [%%a]==[A] set "found=false"
 		if [%%a]==[Esgotado] set "found=false"
 		if [%%a]==[PING:] set "found=false"
@@ -37,7 +32,6 @@ if [%ERRORLEVEL%]==[1]  (
 		if [%%a]==[Fail] set "found=false"
 		if [%%a]==[Exhausted] set "found=false"
 		if [%%a]==[An] set "found=false"
->>>>>>> parent of e7011cd... Update BAT_PING.bat
 	)
 )
 

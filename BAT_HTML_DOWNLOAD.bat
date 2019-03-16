@@ -25,16 +25,12 @@ setlocal enableextensions disabledelayedexpansion
 :: Testa task ::
 >nul (
         rem remove task if already present
-echo 28
         bitsadmin /list | find "%taskName%" && bitsadmin /cancel "%taskName%" > nul 2>&1
         rem create the task
-echo 31
         bitsadmin /create "%taskName%" > nul 2>&1
         rem include our file in the task
-echo 34
         bitsadmin /ADDFILEWITHRANGES "%taskName%" "%source%" "%destination%" 0:eof > nul 2>&1
         rem start the download
-echo 37
         bitsadmin /resume "%taskName%" > nul 2>&1
     )
 
@@ -47,7 +43,6 @@ echo 37
         if "%%~b"=="TRANSFERRED" ( 
             set "exitCode=0"
             >nul bitsadmin /complete "%taskName%" > nul 2>&1
- 
         )
         if "%%~b"=="ERROR" ( 
             set "exitCode=1"
@@ -59,14 +54,16 @@ echo 37
             timeout /t 2 >nul 
         )
     ) > nul 2>&1
+	
 :: Saida com falhas ::
-    if not defined exitCode ( echo TIMEOUT & exit /b 1 )
-    if not exist "%destination%" ( echo ERROR & exit /b 1 )
+    if not defined exitCode ( echo FALHA TIMEOUT & exit /b 1 )
+    if not exist "%destination%" ( echo FALHA ERROR & exit /b 1 )
 
 
 :: Saida se ok ::
 	type "%destination%"
 	del "%destination%"
+	echo SUCESSO
 	exit /b 0
 	
 	

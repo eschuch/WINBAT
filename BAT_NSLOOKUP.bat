@@ -23,14 +23,14 @@ nslookup %~1 %~2 > "%destination%" 2>&1
 
 
 for /f %%a in ('type "%destination%"') do if [%%a]==[***] set "found=false"
+
+type "%destination%"
+del "%destination%"
+
 if %found% == true (
-	type "%destination%"
-	del "%destination%"
 	echo SUCESSO
 	exit /b 0
 ) else (
-	type "%destination%"
-	del "%destination%"
 	echo FALHA
 	exit /b 1
 )
